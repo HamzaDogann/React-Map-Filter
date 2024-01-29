@@ -1,18 +1,29 @@
-﻿ React-Map-Filter
+Bu proje, kimya alanında önemli başarılar elde etmiş bazı insanları göstermektedir. React kullanarak, `filter` ve `map` fonksiyonlarıyla veri manipülasyonunu öğrenmeyi hedeflemektedir.
 
-# React Map ve Filter ile Listeleme İşlemi
+## Filter ve Map Nedir?
 
-Bu projede, React kullanarak bir liste öğelerini map ve filter fonksiyonlarıyla işleyerek dinamik olarak filtrelemeyi ve listelemeyi öğrendim. Bu tekniklerle veri manipülasyonunu kolayca gerçekleştirebilir ve kullanıcıların belirli kriterlere göre listeyi filtrelemesine olanak sağlayabiliriz.
+- **Filter Fonksiyonu:** `filter` fonksiyonu, bir dizide belirli bir koşulu sağlayan öğeleri filtrelememize olanak tanır. Bu projede, kimyagerlerin listesinden sadece kimyagerleri filtrelemek için kullanılmıştır.
 
-## Map Fonksiyonu
+- **Map Fonksiyonu:** `map` fonksiyonu, bir dizideki her öğe üzerinde döngü yapmamıza ve her öğe için belirli bir işlem gerçekleştirmemize olanak tanır. Bu projede, kimyagerlerin listesindeki her bir kimyager için bir liste öğesi oluşturmak için kullanılmıştır.
 
-`map` fonksiyonu, bir dizideki her öğe üzerinde döngü yapmamıza ve her öğe için belirli bir işlem gerçekleştirmemize olanak tanır. Bu projede, `map` fonksiyonunu kullanarak bir veri dizisindeki her öğeyi belirli bir bileşen veya içerikle eşleştirebilir ve kullanıcıya gösterebiliriz.
+## Örnek Kodlar
 
 ```jsx
-const liste = [1, 2, 3, 4, 5];
+import { people } from './data.js';
+import getImageUrl from './utils.js';
 
-const listeElemanlari = liste.map((eleman) => (
-  <div key={eleman}>{eleman}</div>
+const chemists = people.filter(person => person.profession === "chemist");
+
+const listItems = chemists.map(person => (
+  <li key={person.id}>
+    <img
+      src={getImageUrl(person)}
+      alt={person.name}
+    />
+    <p>
+      <b>{person.name}:</b>
+      {' '} Bir {person.profession}, {' '}
+      {person.accomplishment} ile tanınıyor.
+    </p>
+  </li>
 ));
-
-return <div>{listeElemanlari}</div>;
